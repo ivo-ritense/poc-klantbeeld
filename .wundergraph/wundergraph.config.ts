@@ -1,26 +1,24 @@
-import { authProviders, configureWunderGraphApplication, cors, introspect, templates } from '@wundergraph/sdk';
-import { NextJsTemplate } from '@wundergraph/nextjs/dist/template';
+import {authProviders, configureWunderGraphApplication, cors, introspect} from '@wundergraph/sdk';
+import {NextJsTemplate} from '@wundergraph/nextjs/dist/template';
 import server from './wundergraph.server';
 import operations from './wundergraph.operations';
-import {openapi} from "@wundergraph/sdk/dist/integrations/datasources";
-import {source} from "common-tags";
 
 const spaceX = introspect.graphql({
 	apiNamespace: 'spacex',
 	url: 'https://spacex-api.fly.dev/graphql/',
 });
 
-const besluitenApi = introspect.openApiV2({
-	apiNamespace: 'besluiten',
+const mockApi = introspect.openApiV2({
+	apiNamespace: 'mock',
 	source: {
 		kind: 'file',
-		filePath: './specs/besluiten-api.json'
+		filePath: './specs/mock-api.json'
 	},
 });
 
 // configureWunderGraph emits the configuration
 configureWunderGraphApplication({
-	apis: [spaceX, besluitenApi],
+	apis: [spaceX, mockApi],
 	server,
 	operations,
 	generate: {

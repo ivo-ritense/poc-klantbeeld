@@ -1,0 +1,29 @@
+query Customer(
+    $customerId: UUID!
+    $bsn: BigInt! @internal
+) {
+	klant: mock_getKlant(id: $customerId){
+		bsn @export(as: "bsn")
+		_join {
+		    persoon: mock_getPersoon(bsn: $bsn) {
+                achternaam
+                contactgegevens
+                geboortedatum
+                tussenvoegsel
+                voornaam
+                woonplaats
+		    }
+		}
+		_join {
+		    voertuig: mock_getVoertuig(bsn: $bsn) {
+                apk_vervaldatum
+                bouwjaar
+                brandstof
+                kenteken
+                kleur
+                merk
+                model
+		    }
+		}
+	}
+}

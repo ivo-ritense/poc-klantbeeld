@@ -22,8 +22,9 @@ import type { OperationErrors } from "./ts-operation-errors";
 
 import type { PublicCustomClaims } from "./claims";
 import type {
-	BesluitenResponse,
-	BesluitenResponseData,
+	CustomerResponse,
+	CustomerInput,
+	CustomerResponseData,
 	DragonsResponse,
 	DragonsResponseData,
 	IncrementalDataResponse,
@@ -56,13 +57,13 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "bc1debb1",
+	applicationHash: "3416cf4f",
 	baseURL: "http://localhost:9991",
 	sdkVersion: "0.184.2",
 };
 
 export const operationMetadata: OperationMetadata = {
-	Besluiten: {
+	Customer: {
 		requiresAuthentication: false,
 	},
 	Dragons: {
@@ -140,9 +141,9 @@ export const createClient = (config?: CreateClientConfig) => {
 };
 
 export type Queries = {
-	Besluiten: {
-		input?: undefined;
-		response: { data?: BesluitenResponse["data"]; error?: ClientOperationErrors };
+	Customer: {
+		input: CustomerInput;
+		response: { data?: CustomerResponse["data"]; error?: ClientOperationErrors };
 		requiresAuthentication: false;
 		liveQuery: boolean;
 	};
@@ -185,9 +186,9 @@ export type Subscriptions = {
 		response: { data?: UsersSubscribeResponseData; error?: OperationErrors["users/subscribe"] };
 		requiresAuthentication: false;
 	};
-	Besluiten: {
-		input?: undefined;
-		response: { data?: BesluitenResponse["data"]; error?: ClientOperationErrors };
+	Customer: {
+		input: CustomerInput;
+		response: { data?: CustomerResponse["data"]; error?: ClientOperationErrors };
 		liveQuery: true;
 		requiresAuthentication: false;
 	};
@@ -212,9 +213,9 @@ export type Subscriptions = {
 };
 
 export type LiveQueries = {
-	Besluiten: {
-		input?: undefined;
-		response: { data?: BesluitenResponse["data"]; error?: ClientOperationErrors };
+	Customer: {
+		input: CustomerInput;
+		response: { data?: CustomerResponse["data"]; error?: ClientOperationErrors };
 		liveQuery: true;
 		requiresAuthentication: false;
 	};

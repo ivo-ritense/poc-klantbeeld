@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { useQuery, withWunderGraph } from '../components/generated/nextjs';
+import {undefined} from "zod";
 
 const Home: NextPage = () => {
 	const dragons = useQuery({
@@ -9,7 +10,9 @@ const Home: NextPage = () => {
 		dragons.mutate();
 	};
 	const zaken = useQuery({
-		operationName: 'Besluiten',
+		operationName: 'Customer', input: {
+			customerId: "1e8c18a6-6c5e-464b-bca7-779676fdd217"
+		}
 	});
 	return (
 		<div>
@@ -68,7 +71,7 @@ const Home: NextPage = () => {
 					<div className="mx-auto flex max-w-sm flex-col items-center">
 						<p className="mt-3 mb-8 text-center text-black/80">
 							This is the result of your <code
-							className="font-mono font-medium text-amber-500 font-bold">Zaken</code>{' '}
+							className="font-mono font-medium text-amber-500 font-bold">Customer</code>{' '}
 							operation.
 						</p>
 						<code className="p-3" data-testid="result">

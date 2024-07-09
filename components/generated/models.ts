@@ -13,6 +13,10 @@ export type JSONValue = string | number | boolean | JSONObject | Array<JSONValue
 
 export type JSONObject = { [key: string]: JSONValue };
 
+export interface CustomerInput {
+	customerId: string;
+}
+
 export type IncrementalDelayInput = ExtractInput<typeof function_IncrementalDelay>;
 
 export type UsersGetInput = ExtractInput<typeof function_UsersGet>;
@@ -20,6 +24,11 @@ export type UsersGetInput = ExtractInput<typeof function_UsersGet>;
 export type UsersSubscribeInput = ExtractInput<typeof function_UsersSubscribe>;
 
 export type UsersUpdateInput = ExtractInput<typeof function_UsersUpdate>;
+
+export interface CustomerInputInternal {
+	customerId: string;
+	bsn: string | number;
+}
 
 export interface IncrementalDelayInputInternal {
 	seconds: number;
@@ -39,8 +48,13 @@ export interface UsersUpdateInputInternal {
 	bio: string;
 }
 
-export interface BesluitenResponse {
-	data?: BesluitenResponseData;
+export interface CustomerInputInjected {
+	customerId: string;
+	bsn: string | number;
+}
+
+export interface CustomerResponse {
+	data?: CustomerResponseData;
 	errors?: GraphQLError[];
 }
 
@@ -74,11 +88,28 @@ export interface UsersUpdateResponse {
 	errors?: GraphQLError[];
 }
 
-export interface BesluitenResponseData {
-	besluiten?: {
-		__typename?: "besluiten_Fout" | "besluiten_ValidatieFout" | "besluiten_besluit_list_200_response";
-		count?: number;
-		next?: string;
+export interface CustomerResponseData {
+	klant?: {
+		bsn: string;
+		_join: {
+			persoon?: {
+				achternaam: string;
+				contactgegevens: string;
+				geboortedatum: string;
+				tussenvoegsel: string;
+				voornaam: string;
+				woonplaats: string;
+			};
+			voertuig?: {
+				apk_vervaldatum: string;
+				bouwjaar: string | number;
+				brandstof: string;
+				kenteken: string;
+				kleur: string;
+				merk: string;
+				model: string;
+			};
+		};
 	};
 }
 
