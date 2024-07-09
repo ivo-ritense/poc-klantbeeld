@@ -1,0 +1,9 @@
+query Zaken {
+	besluiten: besluiten_besluit_list {
+	    __typename
+		... on besluiten_besluit_list_200_response {
+            count
+            next
+        }
+	}
+}
