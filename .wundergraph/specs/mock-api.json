@@ -1,0 +1,354 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/voertuigen/persoon": {
+      "get": {
+        "tags": [
+          "api-resource"
+        ],
+        "operationId": "getVoertuigen",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Voertuig"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/voertuigen/persoon/{bsn}": {
+      "get": {
+        "tags": [
+          "api-resource"
+        ],
+        "operationId": "getVoertuig",
+        "parameters": [
+          {
+            "name": "bsn",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Voertuig"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thema": {
+      "get": {
+        "tags": [
+          "api-resource"
+        ],
+        "operationId": "getThemas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Thema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thema/{id}": {
+      "get": {
+        "tags": [
+          "api-resource"
+        ],
+        "operationId": "getThema",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Thema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/persoon": {
+      "get": {
+        "tags": [
+          "api-resource"
+        ],
+        "operationId": "getPersonen",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Persoon"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/persoon/{bsn}": {
+      "get": {
+        "tags": [
+          "api-resource"
+        ],
+        "operationId": "getPersoon",
+        "parameters": [
+          {
+            "name": "bsn",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Persoon"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/klant": {
+      "get": {
+        "tags": [
+          "api-resource"
+        ],
+        "operationId": "getKlanten",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Klant"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/klant/{id}": {
+      "get": {
+        "tags": [
+          "api-resource"
+        ],
+        "operationId": "getKlant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Klant"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Persoon": {
+        "required": [
+          "achternaam",
+          "bsn",
+          "contactgegevens",
+          "geboortedatum",
+          "tussenvoegsel",
+          "voornaam",
+          "woonplaats"
+        ],
+        "type": "object",
+        "properties": {
+          "voornaam": {
+            "type": "string"
+          },
+          "tussenvoegsel": {
+            "type": "string"
+          },
+          "achternaam": {
+            "type": "string"
+          },
+          "geboortedatum": {
+            "type": "string"
+          },
+          "bsn": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "woonplaats": {
+            "type": "string"
+          },
+          "contactgegevens": {
+            "type": "string"
+          }
+        }
+      },
+      "Voertuig": {
+        "required": [
+          "apk_vervaldatum",
+          "bouwjaar",
+          "brandstof",
+          "eigenaar",
+          "kenteken",
+          "kleur",
+          "merk",
+          "model"
+        ],
+        "type": "object",
+        "properties": {
+          "kenteken": {
+            "type": "string"
+          },
+          "merk": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "bouwjaar": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "kleur": {
+            "type": "string"
+          },
+          "brandstof": {
+            "type": "string"
+          },
+          "eigenaar": {
+            "$ref": "#/components/schemas/Persoon"
+          },
+          "apk_vervaldatum": {
+            "type": "string"
+          }
+        }
+      },
+      "Thema": {
+        "required": [
+          "id",
+          "key",
+          "title",
+          "zaaktypen"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "key": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "zaaktypen": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Klant": {
+        "required": [
+          "bsn",
+          "uuid"
+        ],
+        "type": "object",
+        "properties": {
+          "bsn": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    }
+  }
+}
