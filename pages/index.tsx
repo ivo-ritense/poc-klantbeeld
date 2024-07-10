@@ -1,6 +1,5 @@
-import { NextPage } from 'next';
-import { useQuery, withWunderGraph } from '../components/generated/nextjs';
-import {undefined} from "zod";
+import {NextPage} from 'next';
+import {useQuery, withWunderGraph} from '../components/generated/nextjs';
 
 const Home: NextPage = () => {
 	const dragons = useQuery({
@@ -9,8 +8,14 @@ const Home: NextPage = () => {
 	const refresh = () => {
 		dragons.mutate();
 	};
-	const zaken = useQuery({
+/*	const customer = useQuery({
 		operationName: 'Customer', input: {
+			customerId: "1e8c18a6-6c5e-464b-bca7-779676fdd217"
+		}
+	});*/
+	const thema = useQuery({
+		operationName: 'thema/get', input: {
+			themaId: "all",
 			customerId: "1e8c18a6-6c5e-464b-bca7-779676fdd217"
 		}
 	});
@@ -68,14 +73,24 @@ const Home: NextPage = () => {
 							{JSON.stringify(dragons, null, 2)}
 						</code>
 					</div>
-					<div className="mx-auto flex max-w-sm flex-col items-center">
+{/*					<div className="mx-auto flex max-w-sm flex-col items-center">
 						<p className="mt-3 mb-8 text-center text-black/80">
 							This is the result of your <code
 							className="font-mono font-medium text-amber-500 font-bold">Customer</code>{' '}
 							operation.
 						</p>
 						<code className="p-3" data-testid="result">
-							{JSON.stringify(zaken, null, 2)}
+							{JSON.stringify(customer, null, 2)}
+						</code>
+					</div>*/}
+					<div className="mx-auto flex max-w-sm flex-col items-center">
+						<p className="mt-3 mb-8 text-center text-black/80">
+							This is the result of your <code
+							className="font-mono font-medium text-amber-500 font-bold">Thema</code>{' '}
+							operation.
+						</p>
+						<code className="p-3" data-testid="result">
+							{JSON.stringify(thema, null, 2)}
 						</code>
 					</div>
 					<div className="flex justify-center mt-8">

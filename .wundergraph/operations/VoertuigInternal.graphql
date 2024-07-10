@@ -1,0 +1,13 @@
+query (
+    $bsn: BigInt!
+) @internalOperation {
+    voertuig: mock_getVoertuig(bsn: $bsn) {
+        apk_vervaldatum
+        bouwjaar
+        brandstof
+        kenteken
+        kleur
+        merk
+        model
+    }
+}

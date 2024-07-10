@@ -32,6 +32,9 @@ import type {
 	IncrementalDelayResponse,
 	IncrementalDelayInput,
 	IncrementalDelayResponseData,
+	ThemaGetResponse,
+	ThemaGetInput,
+	ThemaGetResponseData,
 	UsersGetResponse,
 	UsersGetInput,
 	UsersGetResponseData,
@@ -57,7 +60,7 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "3416cf4f",
+	applicationHash: "cee428d9",
 	baseURL: "http://localhost:9991",
 	sdkVersion: "0.184.2",
 };
@@ -73,6 +76,9 @@ export const operationMetadata: OperationMetadata = {
 		requiresAuthentication: false,
 	},
 	"incremental/delay": {
+		requiresAuthentication: false,
+	},
+	"thema/get": {
 		requiresAuthentication: false,
 	},
 	"users/get": {
@@ -159,6 +165,12 @@ export type Queries = {
 		requiresAuthentication: false;
 		liveQuery: boolean;
 	};
+	"thema/get": {
+		input: ThemaGetInput;
+		response: { data?: ThemaGetResponseData; error?: OperationErrors["thema/get"] };
+		requiresAuthentication: false;
+		liveQuery: boolean;
+	};
 	"users/get": {
 		input: UsersGetInput;
 		response: { data?: UsersGetResponseData; error?: OperationErrors["users/get"] };
@@ -204,6 +216,12 @@ export type Subscriptions = {
 		liveQuery: true;
 		requiresAuthentication: false;
 	};
+	"thema/get": {
+		input: ThemaGetInput;
+		response: { data?: ThemaGetResponse["data"]; error?: ClientOperationErrors };
+		liveQuery: true;
+		requiresAuthentication: false;
+	};
 	"users/get": {
 		input: UsersGetInput;
 		response: { data?: UsersGetResponse["data"]; error?: ClientOperationErrors };
@@ -228,6 +246,12 @@ export type LiveQueries = {
 	"incremental/delay": {
 		input: IncrementalDelayInput;
 		response: { data?: IncrementalDelayResponse["data"]; error?: ClientOperationErrors };
+		liveQuery: true;
+		requiresAuthentication: false;
+	};
+	"thema/get": {
+		input: ThemaGetInput;
+		response: { data?: ThemaGetResponse["data"]; error?: ClientOperationErrors };
 		liveQuery: true;
 		requiresAuthentication: false;
 	};

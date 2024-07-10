@@ -13,8 +13,6 @@ query Customer(
                 voornaam
                 woonplaats
 		    }
-		}
-		_join {
 		    voertuig: mock_getVoertuig(bsn: $bsn) {
                 apk_vervaldatum
                 bouwjaar

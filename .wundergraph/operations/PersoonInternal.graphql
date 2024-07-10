@@ -1,0 +1,12 @@
+query (
+    $bsn: BigInt!
+) @internalOperation {
+    persoon: mock_getPersoon(bsn: $bsn) {
+        achternaam
+        contactgegevens
+        geboortedatum
+        tussenvoegsel
+        voornaam
+        woonplaats
+    }
+}

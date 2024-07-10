@@ -2,6 +2,7 @@
 
 import type function_IncrementalData from "../../.wundergraph/operations/incremental/data";
 import type function_IncrementalDelay from "../../.wundergraph/operations/incremental/delay";
+import type function_ThemaGet from "../../.wundergraph/operations/thema/get";
 import type function_UsersGet from "../../.wundergraph/operations/users/get";
 import type function_UsersSubscribe from "../../.wundergraph/operations/users/subscribe";
 import type function_UsersUpdate from "../../.wundergraph/operations/users/update";
@@ -17,7 +18,21 @@ export interface CustomerInput {
 	customerId: string;
 }
 
+export interface CustomerInternalInput {
+	customerId: string;
+}
+
+export interface PersoonInternalInput {
+	bsn: string | number;
+}
+
+export interface VoertuigInternalInput {
+	bsn: string | number;
+}
+
 export type IncrementalDelayInput = ExtractInput<typeof function_IncrementalDelay>;
+
+export type ThemaGetInput = ExtractInput<typeof function_ThemaGet>;
 
 export type UsersGetInput = ExtractInput<typeof function_UsersGet>;
 
@@ -30,8 +45,25 @@ export interface CustomerInputInternal {
 	bsn: string | number;
 }
 
+export interface CustomerInternalInputInternal {
+	customerId: string;
+}
+
+export interface PersoonInternalInputInternal {
+	bsn: string | number;
+}
+
+export interface VoertuigInternalInputInternal {
+	bsn: string | number;
+}
+
 export interface IncrementalDelayInputInternal {
 	seconds: number;
+}
+
+export interface ThemaGetInputInternal {
+	themaId: string;
+	customerId: string;
 }
 
 export interface UsersGetInputInternal {
@@ -53,13 +85,40 @@ export interface CustomerInputInjected {
 	bsn: string | number;
 }
 
+export interface CustomerInternalInputInjected {
+	customerId: string;
+}
+
+export interface PersoonInternalInputInjected {
+	bsn: string | number;
+}
+
+export interface VoertuigInternalInputInjected {
+	bsn: string | number;
+}
+
 export interface CustomerResponse {
 	data?: CustomerResponseData;
 	errors?: GraphQLError[];
 }
 
+export interface CustomerInternalResponse {
+	data?: CustomerInternalResponseData;
+	errors?: GraphQLError[];
+}
+
 export interface DragonsResponse {
 	data?: DragonsResponseData;
+	errors?: GraphQLError[];
+}
+
+export interface PersoonInternalResponse {
+	data?: PersoonInternalResponseData;
+	errors?: GraphQLError[];
+}
+
+export interface VoertuigInternalResponse {
+	data?: VoertuigInternalResponseData;
 	errors?: GraphQLError[];
 }
 
@@ -70,6 +129,11 @@ export interface IncrementalDataResponse {
 
 export interface IncrementalDelayResponse {
 	data?: IncrementalDelayResponseData;
+	errors?: GraphQLError[];
+}
+
+export interface ThemaGetResponse {
+	data?: ThemaGetResponseData;
 	errors?: GraphQLError[];
 }
 
@@ -113,6 +177,12 @@ export interface CustomerResponseData {
 	};
 }
 
+export interface CustomerInternalResponseData {
+	klant?: {
+		bsn: string;
+	};
+}
+
 export interface DragonsResponseData {
 	spacex_dragons?: {
 		name?: string;
@@ -120,9 +190,34 @@ export interface DragonsResponseData {
 	}[];
 }
 
+export interface PersoonInternalResponseData {
+	persoon?: {
+		achternaam: string;
+		contactgegevens: string;
+		geboortedatum: string;
+		tussenvoegsel: string;
+		voornaam: string;
+		woonplaats: string;
+	};
+}
+
+export interface VoertuigInternalResponseData {
+	voertuig?: {
+		apk_vervaldatum: string;
+		bouwjaar: string | number;
+		brandstof: string;
+		kenteken: string;
+		kleur: string;
+		merk: string;
+		model: string;
+	};
+}
+
 export type IncrementalDataResponseData = ExtractResponse<typeof function_IncrementalData>;
 
 export type IncrementalDelayResponseData = ExtractResponse<typeof function_IncrementalDelay>;
+
+export type ThemaGetResponseData = ExtractResponse<typeof function_ThemaGet>;
 
 export type UsersGetResponseData = ExtractResponse<typeof function_UsersGet>;
 

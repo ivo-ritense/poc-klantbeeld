@@ -5,6 +5,7 @@ import type { ClientOperationErrors, GraphQLError } from "@wundergraph/sdk/clien
 export type OperationErrors = {
 	"incremental/data": IncrementalDataErrors;
 	"incremental/delay": IncrementalDelayErrors;
+	"thema/get": ThemaGetErrors;
 	"users/get": UsersGetErrors;
 	"users/subscribe": UsersSubscribeErrors;
 	"users/update": UsersUpdateErrors;
@@ -12,6 +13,7 @@ export type OperationErrors = {
 
 export type IncrementalDataErrors = ClientOperationErrors;
 export type IncrementalDelayErrors = ClientOperationErrors;
+export type ThemaGetErrors = ClientOperationErrors;
 export type UsersGetErrors = ClientOperationErrors;
 export type UsersSubscribeErrors = ClientOperationErrors;
 export type UsersUpdateErrors = ClientOperationErrors;
