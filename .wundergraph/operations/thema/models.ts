@@ -9,5 +9,10 @@ export interface Datasource {
     id: string
     operation: keyof Queries
     inputs: (inputs: any, dependencyData: any) => any
-    dependencies?: string[]
+    dependencies: string[]
+}
+
+export interface Result {
+    datasource: Datasource
+    operation: any
 }

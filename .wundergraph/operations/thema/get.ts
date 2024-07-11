@@ -1,6 +1,6 @@
 import {createOperation, z} from '../../generated/wundergraph.factory';
 import {InternalOperationsClient} from "../../generated/wundergraph.internal.operations.client";
-import {Datasource} from "./models";
+import {Datasource, Result} from "./models";
 import {themas} from "./themas";
 
 export default createOperation.query({
@@ -34,17 +34,23 @@ async function resolveData(
     datasources: Datasource[]
 ) {
     const dependencyData: {[key: string]: any} = {}
-    const resultData: any[] = []
+    let resultData: any[] = []
+    const resolvedDependencies: string[] = []
 
-    interface Result {
-        datasource: Datasource
-        operation: any
-    }
+    return await resolveOperations(operations, input, datasources, resolvedDependencies, resultData, dependencyData)
+}
 
+async function resolveOperations(
+    operations: Omit<InternalOperationsClient, 'cancelSubscriptions'>,
+    input: any,
+    datasources: Datasource[],
+    resolvedDependencies: string[],
+    resultData: any[],
+    dependencyData: { [key: string]: any }
+) {
     const promises: Promise<Result>[] = datasources.filter(
-        d => d.dependencies === undefined
-    ).map( async d =>
-         {
+        d => d.dependencies.length > 0 ? d.dependencies.every(dep => resolvedDependencies.includes(dep)) : true
+    ).map(async d => {
             return {
                 datasource: d,
                 operation: await operations.query({
@@ -54,24 +60,18 @@ async function resolveData(
             }
         }
     )
-    const firstPass = await Promise.all(promises)
-    firstPass.forEach(result => {
+
+    const pass = await Promise.all(promises)
+    pass.forEach(result => {
         resultData.push(result.operation.data)
         dependencyData[result.datasource.id] = result.operation.data
+        resolvedDependencies.push(result.datasource.id)
     })
+    datasources = datasources.filter(d => !resolvedDependencies.includes(d.id))
 
-    const promisesWithDependency = datasources.filter(
-        d => d.dependencies !== undefined
-    ).map(d =>
-        operations.query({
-            operationName: d.operation,
-            input: d.inputs(input, dependencyData)
-        })
-    )
-    const secondPass = await Promise.all(promisesWithDependency)
-    secondPass.forEach(result => {
-        resultData.push(result.data)
-    })
+    if (datasources.length > 0) {
+        await resolveOperations(operations, input, datasources, resolvedDependencies, resultData, dependencyData)
+    }
 
     return resultData
 }

@@ -6,7 +6,8 @@ export const datasources: {[key: string]: Datasource} = {
         operation: 'CustomerInternal',
         inputs: (inputs) => ({
             customerId: inputs.customerId
-        })
+        }),
+        dependencies: []
     },
     persoon: {
         id: 'persoon',
@@ -22,6 +23,6 @@ export const datasources: {[key: string]: Datasource} = {
         inputs: (inputs, dependencyData) => ({
             bsn: dependencyData.klant.klant.bsn
         }),
-        dependencies: ['klant']
+        dependencies: ['klant', 'persoon']
     }
 }
